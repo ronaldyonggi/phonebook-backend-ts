@@ -50,6 +50,22 @@ app.get('/api/persons/:id', (req, res) => {
   }
 });
 
+// DELETE a specific person
+app.delete('/api/persons/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const matchedPerson = persons.find(person => person.id === id);
+  if (!matchedPerson) {
+    return res.status(404).json({
+      error: `no person with id ${id}`
+    });
+  }
+
+  persons = persons.filter(person => person.id !== id);
+  return res.status(202).json({
+    message: 'person successfully deleted!'
+  });
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
