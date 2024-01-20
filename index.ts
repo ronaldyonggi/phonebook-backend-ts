@@ -77,6 +77,14 @@ const getRandomInt = (min: number, max: number) => {
 // CREATE a person
 app.post('/api/persons', (req, res) => {
   const { name, number } = req.body;
+
+  const nameAlreadyExist = persons.find(person => person.name === name);
+  if (nameAlreadyExist) {
+    return res.status(400).json({
+      error: 'Name already exists!'
+    });
+  }
+
   if (!name || !number) {
     return res.status(400).json({
       error: 'Missing information!'
