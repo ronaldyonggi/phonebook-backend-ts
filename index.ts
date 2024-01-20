@@ -68,6 +68,27 @@ app.delete('/api/persons/:id', (req, res) => {
   });
 });
 
+const getRandomInt = (min: number, max: number) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+// CREATE a person
+app.post('/api/persons', (req, res) => {
+  const { name, number } = req.body;
+  if (!name || !number) {
+    return res.status(400).json({
+      error: 'Missing information!'
+    });
+  }
+
+  const id = getRandomInt(10, 10000);
+  const newPerson = { id, name, number};
+  persons = persons.concat(newPerson);
+  return res.status(201).json(newPerson);
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
