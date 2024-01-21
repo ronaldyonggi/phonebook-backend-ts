@@ -1,14 +1,20 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import express from 'express';
+import express, { Request, } from 'express';
 import morgan from 'morgan';
 import toNewPerson from './utils/person';
 const app = express();
 
 app.use(express.json());
 
-app.use(morgan('tiny'));
+// Create a new token for morgan
+morgan.token('body', (req: Request, _res) => {
+  return JSON.stringify(req.body);
+});
+
+const morganCustomTokens = ':method :url :status :res[content-length] - :response-time ms :body';
+app.use(morgan(morganCustomTokens));
 
 let persons = [
   { 
