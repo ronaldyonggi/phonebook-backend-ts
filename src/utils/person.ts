@@ -1,4 +1,4 @@
-import { NewPerson } from '../types/person';
+import { NewPerson } from '../types/Person';
 import { isString } from './utils';
 
 // String parser
