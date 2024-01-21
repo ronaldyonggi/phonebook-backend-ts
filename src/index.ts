@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import toNewPerson from './utils/person';
 const app = express();
 
 app.use(express.json());
@@ -76,7 +77,7 @@ const getRandomInt = (min: number, max: number) => {
 
 // CREATE a person
 app.post('/api/persons', (req, res) => {
-  const { name, number } = req.body;
+  const { name, number } = toNewPerson(req.body);
 
   const nameAlreadyExist = persons.find(person => person.name === name);
   if (nameAlreadyExist) {
