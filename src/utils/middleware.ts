@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
+import logger from './logger';
 
 // Morgan middleware
 morgan.token('body', (req: Request, _res) => {
@@ -29,4 +30,10 @@ const errorHandler = (error: Error, _req: Request, res: Response, next: NextFunc
     return next(error);
 
   }
+};
+
+export default {
+  customMorgan,
+  unknownEndpoint,
+  errorHandler
 };
