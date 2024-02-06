@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { NewPerson } from "../types/Person";
+import mongoose from 'mongoose';
+import { NewPerson } from '../types/Person';
 
 const personSchema = new mongoose.Schema<NewPerson>({
   name: {
