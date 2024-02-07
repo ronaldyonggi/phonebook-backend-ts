@@ -4,6 +4,7 @@ import config from './utils/config';
 import logger from './utils/logger';
 import cors from 'cors';
 import middleware from './utils/middleware';
+import personRouter from './routes/personRouter'
 
 const app = express();
 
@@ -23,3 +24,6 @@ app.use(express.json());
 
 // Set up Morgan
 app.use(middleware.customMorgan);
+
+// Set up routing for persons
+app.use('/api/persons', personRouter);
