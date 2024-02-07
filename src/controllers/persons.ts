@@ -17,3 +17,10 @@ const getPerson = ({req, res, next}: ExpressParams) => {
     })
     .catch(error => next(error));
 };
+
+// DELETE a specific person based on given id
+const deletePerson = ({req, res, next}: ExpressParams) => {
+  PersonModel.findByIdAndDelete(req.params.id)
+    .then(() => res.status(204).end())
+    .catch(error => next(error));
+};
