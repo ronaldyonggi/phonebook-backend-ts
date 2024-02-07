@@ -24,3 +24,16 @@ const deletePerson = ({req, res, next}: ExpressParams) => {
     .then(() => res.status(204).end())
     .catch(error => next(error));
 };
+
+// UPDATE a specific person
+const updatePerson = ({req, res, next}: ExpressParams) => {
+  const {name, number} = toNewPerson(req.body);
+
+  const toUpdatePerson = {
+    name, number
+  };
+
+  PersonModel.findByIdAndUpdate(req.params.id, toUpdatePerson, { new: true})
+    .then(updatedPerson => res.json(updatedPerson))
+    .catch(error => next(error));
+};
