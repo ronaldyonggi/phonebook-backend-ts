@@ -27,3 +27,7 @@ app.use(middleware.customMorgan);
 
 // Set up routing for persons
 app.use('/api/persons', personRouter);
+
+// Middleware for handling unknown endpoints
+app.use(middleware.unknownEndpoint);
+
