@@ -31,3 +31,6 @@ app.use('/api/persons', personRouter);
 // Middleware for handling unknown endpoints
 app.use(middleware.unknownEndpoint);
 
+
+// Middleware for handling errors
+app.use(middleware.errorHandler);
