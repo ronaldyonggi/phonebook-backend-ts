@@ -38,9 +38,23 @@ const updatePerson = ({req, res, next}: ExpressParams) => {
     .catch(error => next(error));
 };
 
+// CREATE a person
+const createPerson = ({req, res, next}: ExpressParams) => {
+  const validatedPerson = toNewPerson(req.body);
+
+  const newPerson = new PersonModel({
+    ...validatedPerson
+  });
+
+  newPerson.save()
+    .then(savedPerson => res.json(savedPerson))
+    .catch(error => next(error));
+};
+
 export default {
   getAllPersons,
   getPerson,
   deletePerson,
-  updatePerson
+  updatePerson,
+  createPerson
 };
