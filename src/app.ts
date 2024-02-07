@@ -34,3 +34,5 @@ app.use(middleware.unknownEndpoint);
 
 // Middleware for handling errors
 app.use(middleware.errorHandler);
+
+export default app;
