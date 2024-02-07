@@ -37,3 +37,10 @@ const updatePerson = ({req, res, next}: ExpressParams) => {
     .then(updatedPerson => res.json(updatedPerson))
     .catch(error => next(error));
 };
+
+export default {
+  getAllPersons,
+  getPerson,
+  deletePerson,
+  updatePerson
+};
