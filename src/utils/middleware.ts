@@ -22,13 +22,12 @@ const errorHandler = (error: Error, _req: Request, res: Response, next: NextFunc
   logger.error(error.message);
 
   switch (error.name) {
-  case 'CastError':
-    return res.status(400).send({ error: 'provided id has incorrect format'});
-  case 'ValidationError':
-    return res.status(400).json({ error: error.message });
-  default:
-    return next(error);
-
+    case 'CastError':
+      return res.status(400).send({ error: 'provided id has incorrect format'});
+    case 'ValidationError':
+      return res.status(400).json({ error: error.message });
+    default:
+      return next(error);
   }
 };
 
