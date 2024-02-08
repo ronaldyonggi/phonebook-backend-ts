@@ -4,4 +4,5 @@ export interface ExpressParams {
   req: Request;
   res: Response;
   next: NextFunction;
+  error: Error;
 }
