@@ -1,5 +1,5 @@
 import PersonModel from '../models/person';
-import { ExpressParams } from '../types/Express';
+import { ExpressParams } from '../types/expressParams';
 import toNewPerson from '../utils/person';
 
 // GET all persons
