@@ -1,6 +1,6 @@
 import PersonModel from '../models/person';
 import { ExpressParams } from '../types/expressParams';
-import toNewPerson from '../utils/person';
+import toNewPerson from '../utils/utils';
 
 // GET all persons
 const getAllPersons = ({res, next}: ExpressParams) => {
@@ -13,7 +13,7 @@ const getAllPersons = ({res, next}: ExpressParams) => {
 const getPerson = ({req, res, next}: ExpressParams) => {
   PersonModel.findById(req.params.id)
     .then(person => {
-      person ? res.json(person).end() : res.status(404).json({ error : 'Cannot find note with that id'}).end()
+      person ? res.json(person).end() : res.status(404).json({ error : 'Cannot find note with that id'}).end();
     })
     .catch(error => next(error));
 };

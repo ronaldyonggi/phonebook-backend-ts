@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
-import { NewPerson } from '../types/Person';
+import { NewPerson } from '../types/person';
 
 const personSchema = new mongoose.Schema<NewPerson>({
   name: {
     type: String,
-    required: true
+    required: true,
   },
-  number: String
+  number: String,
 });
 
 export default mongoose.model<NewPerson>('Person', personSchema);
