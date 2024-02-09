@@ -4,7 +4,7 @@ import config from './utils/config';
 import logger from './utils/logger';
 import cors from 'cors';
 import middleware from './utils/middleware';
-import personRouter from './routes/personRouter'
+import personRouter from './routes/personRouter';
 
 const app = express();
 
