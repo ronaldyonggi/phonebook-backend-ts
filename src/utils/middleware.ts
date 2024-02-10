@@ -1,10 +1,9 @@
-import { Request } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import logger from './logger';
-import { ExpressParams } from '../types/expressParams';
 
 // Morgan middleware
-morgan.token('body', (req: Request, _res) => {
+morgan.token('body', (req: Request, _res: Response) => {
   return JSON.stringify(req.body);
 });
 
@@ -12,14 +11,14 @@ const morganCustomTokens = ':method :url :status :res[content-length] - :respons
 const customMorgan = morgan(morganCustomTokens);
 
 // Catch requests to non-existing routes
-const unknownEndpoint = ({res}: ExpressParams) => {
+const unknownEndpoint = (_req: Request, res: Response) => {
   return res.status(404).send({
     error: 'unknown endpoint'
   });
 };
 
 // Error handler
-const errorHandler = ({error, res, next}: ExpressParams) => {
+const errorHandler = (error: Error, _req: Request, res: Response, next: NextFunction) => {
   logger.error(error.message);
 
   switch (error.name) {
