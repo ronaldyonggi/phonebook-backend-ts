@@ -26,16 +26,20 @@ const deletePerson = (req: Request, res: Response, next: NextFunction) => {
 };
 
 // UPDATE a specific person
-const updatePerson = (req: Request, res: Response, next: NextFunction) => {
+const updatePerson = async (req: Request, res: Response, next: NextFunction) => {
   const {name, number} = toNewPerson(req.body);
 
   const toUpdatePerson = {
     name, number
   };
 
-  PersonModel.findByIdAndUpdate(req.params.id, toUpdatePerson, { new: true})
-    .then(updatedPerson => res.json(updatedPerson))
-    .catch(error => next(error));
+  try {
+    const updatedPerson = await PersonModel.findByIdAndUpdate(req.params.id, toUpdatePerson, { new: true, runValidators: true, context: 'query'})
+    res.json(updatedPerson)
+  } catch(error) {
+    next(error)
+  }
+
 };
 
 // CREATE a person
