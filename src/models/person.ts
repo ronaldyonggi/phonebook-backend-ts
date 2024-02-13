@@ -4,6 +4,7 @@ import { NewPerson } from '../types/person';
 const personSchema = new mongoose.Schema<NewPerson>({
   name: {
     type: String,
+    minlength: 3,
     required: true,
   },
   number: String,
