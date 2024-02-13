@@ -4,10 +4,18 @@ import { NewPerson } from '../types/person';
 const personSchema = new mongoose.Schema<NewPerson>({
   name: {
     type: String,
-    minlength: 3,
     required: true,
+    minlength: 3,
   },
-  number: String,
+  number: {
+    type: String,
+    required: true,
+    minlength: 8,
+    validate: {
+      validator: (v: string) => /\d{2,3}-\d+/.test(v),
+      message: props => `${props.value} is not a valid phone number`
+    }
+  }
 });
 
 personSchema.set('toJSON', {
